@@ -8,13 +8,13 @@ public class ControllerDB : MonoBehaviour
     public string dbName = "URI=file:DataBase.db";
     private void Awake()
     {
-        instance=this;
+        instance = this;
     }
     void Start()
     {
         CreateTable();
-        Query("INSERT INTO user (name, password) VALUES ('Jonny', '123456');");
-        Query("SELECT * FROM user;");
+        Query("INSERT INTO usuario (nombre) VALUES ('Jarus');");
+        Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Aloe Vera','Aloe Vera','Planta de la familia de las liliáceas, de hojas carnosas, lanceoladas, con espinas en los bordes, flores amarillas y fruto capsular, que se cría en las regiones cálidas y se usa en medicina y en cosmética.','1','Es una planta que se utiliza para la piel','123456789');");
     }
 
     private void CreateTable()
@@ -25,21 +25,27 @@ public class ControllerDB : MonoBehaviour
 
             using (var command = connection.CreateCommand())
             {
-                string sqlcreation="";
+                string sqlcreation = "";
 
 
-                sqlcreation += "CREATE TABLE IF NOT EXISTS user(";
-                sqlcreation += "id INTEGER NOT NULL ";
-                sqlcreation += "PRIMARY KEY AUTOINCREMENT,";
-                sqlcreation += "name     VARCHAR(50) NOT NULL,";
-                sqlcreation += "password VARCHAR(50) NOT NULL";
+                sqlcreation += "CREATE TABLE IF NOT EXISTS planta(";
+                sqlcreation += "id INTEGER PRIMARY KEY AUTOINCREMENT,";
+                sqlcreation += "nombre     VARCHAR(50) NOT NULL,";
+                sqlcreation += "nombreCientifico     VARCHAR(50) NOT NULL,";
+                sqlcreation += "descripcion VARCHAR(500) NOT NULL,";
+                sqlcreation += "estadio INTEGER NOT NULL,";
+                sqlcreation += "usosMedicinales VARCHAR(500) NOT NULL,";
+                sqlcreation += "codigoQR VARCHAR(50) NOT NULL";
+                sqlcreation += ");";
+
+                sqlcreation += "CREATE TABLE IF NOT EXISTS usuario(";
+                sqlcreation += "id INTEGER PRIMARY KEY AUTOINCREMENT,";
+                sqlcreation += "nombre     VARCHAR(50) NOT NULL";
                 sqlcreation += ");";
 
                 command.CommandText = sqlcreation;
                 command.ExecuteNonQuery();
             }
-
-            connection.Close();
         }
     }
 
@@ -58,7 +64,7 @@ public class ControllerDB : MonoBehaviour
                     while (reader.Read())
                     {
                         Debug.Log("name: " + reader["name"] + " password: " + reader["password"]);
-                        
+
                     }
                 }
             }
