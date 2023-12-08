@@ -20,4 +20,8 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Escaner");
     }
+    public void escenaJardin()
+    {
+        SceneManager.LoadScene("Jardin");
+    }
 }
