@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Vista/Escaner.unity
     guid: 987455b1d2f1d304eab66098012780fc
+  - enabled: 1
+    path: Assets/Scenes/Vista/Jardin.unity
+    guid: be877145c3ed40d408446c47f40ee5e6
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a32dc408f52adda498837e1436861c03,
       type: 2}
