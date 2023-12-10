@@ -4,29 +4,39 @@ using UnityEngine;
 
 public class Camara : MonoBehaviour
 {
-    private bool isDragging = false;
-    private Vector3 dragStartPosition;
-
+public float velocidadMovimiento = 5f;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            isDragging = true;
-            dragStartPosition = Input.mousePosition;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-        }
-
-        if (isDragging)
-        {
-            Vector3 currentPosition = Input.mousePosition;
-            float deltaX = currentPosition.x - dragStartPosition.x;
-            float deltaY = currentPosition.y - dragStartPosition.y;
-            float deltaZ = currentPosition.z - dragStartPosition.z;
-            transform.Translate(deltaX * Time.deltaTime, deltaY * Time.deltaTime, deltaZ * Time.deltaTime);
-        }
+        ManejarEntradaTactil();
     }
+
+    void ManejarEntradaTactil()
+    {
+        if (Input.touchCount == 1)
+        {
+            Touch toque = Input.GetTouch(0);
+
+            switch (toque.phase)
+            {
+                case TouchPhase.Moved:
+                    MoverCamara(toque.deltaPosition);
+                    break;
+                case TouchPhase.Stationary:
+                    // Puedes agregar lógica adicional para acciones cuando el dedo está en reposo.
+                    break;
+                case TouchPhase.Ended:
+                    // Puedes agregar lógica adicional para acciones cuando el toque ha terminado.
+                    break;
+            }
+        }   
+    }
+
+    void MoverCamara(Vector2 deltaPos)
+    {
+        Vector3 direccionMovimiento = new Vector3(deltaPos.x, 0, deltaPos.y);
+        direccionMovimiento = Camera.main.transform.TransformDirection(direccionMovimiento);
+        direccionMovimiento.y = 0;
+
+        transform.Translate(direccionMovimiento * velocidadMovimiento * Time.deltaTime, Space.World);
+    }   
 }
-    
