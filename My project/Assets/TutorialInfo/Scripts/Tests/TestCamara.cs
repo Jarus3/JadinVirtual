@@ -33,11 +33,41 @@ public class TestCamara
 
         Touch toque = new Touch { phase = TouchPhase.Moved, deltaPosition = new Vector2(2f, 3f) };
 
-        camaraScript.ManejarEntradaTactil(); 
-        camaraScript.MoverCamara(toque.deltaPosition); 
+        camaraScript.ManejarEntradaTactil();
+        camaraScript.MoverCamara(toque.deltaPosition);
 
         yield return null;
 
         Assert.AreNotEqual(Vector3.zero, camaraScript.transform.position);
-    }  
+    }
+
+    [Test]
+    public void TestZoomCerca()
+    {
+        GameObject camaraObject = new GameObject();
+        Camara camaraScript = camaraObject.AddComponent<Camara>();
+        Camera mainCamera = new GameObject().AddComponent<Camera>();
+        Camara.SetMainCamera(mainCamera);
+
+        mainCamera.fieldOfView = 60f;
+        camaraScript.Zoom(10f);
+
+        Assert.AreNotEqual(mainCamera.fieldOfView, 60f);
+        Assert.AreNotEqual(mainCamera.fieldOfView, 10f);
+    }
+
+    [Test]
+    public void TestZoomLejos()
+    {
+        GameObject camaraObject = new GameObject();
+        Camara camaraScript = camaraObject.AddComponent<Camara>();
+        Camera mainCamera = new GameObject().AddComponent<Camera>();
+        Camara.SetMainCamera(mainCamera);
+
+        mainCamera.fieldOfView = 60f;
+        camaraScript.Zoom(-10f);
+
+        Assert.AreNotEqual(mainCamera.fieldOfView, 60f);
+        Assert.AreNotEqual(mainCamera.fieldOfView, 121f);
+    }
 }
