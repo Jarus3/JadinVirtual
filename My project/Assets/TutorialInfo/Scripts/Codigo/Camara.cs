@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class Camara : MonoBehaviour
 {
-public float velocidadMovimiento = 5f;
+    public float velocidadMovimiento = 5f;
+    private static Camera mainCamera;
+    void Start()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+    }
+    public static void SetMainCamera(Camera camera)
+    {
+        mainCamera = camera;
+    }
     void Update()
     {
         ManejarEntradaTactil();
     }
-
-    void ManejarEntradaTactil()
+    public void ManejarEntradaTactil()
     {
         if (Input.touchCount == 1)
         {
@@ -22,21 +33,26 @@ public float velocidadMovimiento = 5f;
                     MoverCamara(toque.deltaPosition);
                     break;
                 case TouchPhase.Stationary:
-                    // Puedes agregar lógica adicional para acciones cuando el dedo está en reposo.
                     break;
                 case TouchPhase.Ended:
-                    // Puedes agregar lógica adicional para acciones cuando el toque ha terminado.
                     break;
             }
-        }   
+        }
     }
-
-    void MoverCamara(Vector2 deltaPos)
+    public void MoverCamara(Vector2 deltaPos)
     {
-        Vector3 direccionMovimiento = new Vector3(deltaPos.x, 0, deltaPos.y);
-        direccionMovimiento = Camera.main.transform.TransformDirection(direccionMovimiento);
-        direccionMovimiento.y = 0;
+        Vector3 direccionMovimiento = new Vector3(-deltaPos.x, 0, -deltaPos.y);
 
-        transform.Translate(direccionMovimiento * velocidadMovimiento * Time.deltaTime, Space.World);
-    }   
+        if (mainCamera != null)
+        {
+            direccionMovimiento = mainCamera.transform.TransformDirection(direccionMovimiento);
+            direccionMovimiento.y = 0;
+
+            transform.Translate(direccionMovimiento * velocidadMovimiento * Time.deltaTime, Space.World);
+        }
+        else
+        {
+            Debug.LogError("No se ha establecido la cámara principal.");
+        }
+    }
 }
