@@ -87,13 +87,38 @@ public class ControllerDB : MonoBehaviour
     //     Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Uri uri', 'Arctostaphylos uva-ursi', 'Planta arbustiva o pequeña árbolada con hojas compuestas por folíolos ovalados dentados. Sus flores son pequeñas blancas o rosadas agrupadas en espigas terminales. Su fruto es una cápsula leñosa con semillas aladas.', '0', 'Es una planta medicinal que se usa como astringente antiséptico antiinflamatorio digestivo hepático diurético depurativo laxante antiespasmódico antitumoral.', '4');");
     //     Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Sewenqa','Cortaderia jubata','Es una especie de gramínea conocida por varios nombres comunes, incluidos hierba de la pampa de los Andes y plumeros. Es similar a su pariente ampliamente difundido, el plumero de las pampas Cortaderia selloana, pero puede desarrollarse más alto, llegando a medir hasta siete metros de alto.','0','Tiene varios usos medicinales, como antiinflamatorio, cicatrizante, antiespasmódico y digestivo. También se usa como forraje para el ganado y como abono orgánico para los cultivos.','123456789');");
     }
-    // public void llenarDatosUsuario(string nombre){
-    //     string aux = "INSERT INTO usuario (nombre) VALUES ('"+nombre+"');";
-    //     Query(aux);
-    // }
-    // public void llenarDatosPlanta(string nombre,string nombreCientifico,string descripcion,string estadio,string usosMedicinales,string codigoQR){
-    //     string aux = "INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('"+nombre+"','"+nombreCientifico+"','"+descripcion+"','"+estadio+"','"+usosMedicinales+"','"+codigoQR+"');";
-    //     Query(aux);
-    // }
+    public void llenarDatosUsuario(string nombre){
+        string aux = "INSERT INTO usuario (nombre) VALUES ('"+nombre+"');";
+        Query(aux);
+    }
+    public void llenarDatosPlanta(string nombre,string nombreCientifico,string descripcion,int estadio,string usosMedicinales,string codigoQR){
+        string aux = "INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('"+nombre+"','"+nombreCientifico+"','"+descripcion+"','"+estadio+"','"+usosMedicinales+"','"+codigoQR+"');";
+        Query(aux);
+    }
+    public Planta getInformacionPlanta(string nombre){
+        string aux = "SELECT * FROM planta WHERE nombre = '"+nombre+"';";
+        GameObject plantaObj = new GameObject("Planta");
+        Planta aux2=plantaObj.AddComponent<Planta>();;
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = aux;
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        aux2.Inicializar(reader["nombre"].ToString(),reader["nombreCientifico"].ToString(),reader["descripcion"].ToString(),int.Parse(reader["estadio"].ToString()),reader["usosMedicinales"].ToString(),reader["codigoQR"].ToString());
+                    }
+                }
+            }
+
+            connection.Close();
+        }
+        return aux2;
+    }
 }
 

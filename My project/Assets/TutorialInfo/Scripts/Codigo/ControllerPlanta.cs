@@ -5,40 +5,27 @@ using static Planta;
 
 public class ControllerPlanta : MonoBehaviour
 {
-    Planta planta;
+    private Planta planta;
+    private GameObject plantaObj;
     // Start is called before the first frame update
-    void Start()
+    public void Inicializar()
     {
-        planta = new Planta();
+        plantaObj = new GameObject("Planta");
+        planta = plantaObj.AddComponent<Planta>();
+        planta.Inicializar("1", "2", "3", 0, "4", "5");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void crecer()
     {
-        
+        int nuevo=planta.getEstadio()+1;
+        planta.setEstadio(nuevo);
+    }
+    public Planta getPlanta()
+    {
+        return planta;
     }
     public int getEstadio()
     {
-        return planta.estadio;
-    }
-    public string getQR()
-    {
-        return "1";
-    }
-    public string getNombre()
-    {
-        return "1";
-    }
-    public string getDescripcion()
-    {
-        return "1";
-    }
-    public string getUsosMedicinales()
-    {
-        return "1";
+        return planta.getEstadio();
     }
 }
