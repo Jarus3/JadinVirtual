@@ -23,6 +23,19 @@ public class TestControllerDB
     }
     [Test]
     public void TestAddPlanta(){
+        string nombre = "Fresa";
+        string nombreCientifico = "Ella es una fresa";
+        string descripcion = "Planta de la familia de las liliáceas, de hojas carnosas, lanceoladas, con espinas en los bordes, flores amarillas y fruto capsular, que se cría en las regiones cálidas y se usa en medicina y en cosmética.";
+        int estadio = 1;
+        string usosMedicinales = "Es una planta que se utiliza para la piel";
+        string codigoQR = "123456789";
+        db.llenarDatosPlanta(nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR);
+        Planta planta;
+        planta = db.getInformacionPlanta(nombre); 
+        Assert.NotNull(planta.getNombre());
+    }
+    [Test]
+    public void TestGetInformacionPlanta(){
         string nombre = "Aloe Vera";
         string nombreCientifico = "Aloe Vera";
         string descripcion = "Planta de la familia de las liliáceas, de hojas carnosas, lanceoladas, con espinas en los bordes, flores amarillas y fruto capsular, que se cría en las regiones cálidas y se usa en medicina y en cosmética.";
@@ -32,8 +45,6 @@ public class TestControllerDB
         db.llenarDatosPlanta(nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR);
         Planta planta;
         planta = db.getInformacionPlanta(nombre); 
-        //string query = "SELECT * FROM planta WHERE nombre = 'Aloe Vera'";
-        //db.Query(query);
         Assert.AreEqual(planta.getNombre(), nombre);
         Assert.AreEqual(planta.getNombreCientifico(), nombreCientifico);
         Assert.AreEqual(planta.getDescripcion(), descripcion);

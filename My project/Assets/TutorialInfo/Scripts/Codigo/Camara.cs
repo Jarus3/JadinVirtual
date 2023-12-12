@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Camara : MonoBehaviour
 {
-    public float velocidadMovimiento = 5f;
-    public float zoomSpeed = 2f;
+    public float velocidadMovimiento = 2f;
+    public float zoomSpeed = 1f;
 
     private static Camera mainCamera;
 
