@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class Menu : MonoBehaviour
+public class QR : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,18 +15,8 @@ public class Menu : MonoBehaviour
     {
         
     }
-
-    public void escenaEscaner()
+    public void escenaMenu()
     {
-        SceneManager.LoadScene("Escaner");
-    }
-    public void escenaJardin()
-    {
-        SceneManager.LoadScene("Jardin");
-    }
-    
-    public void escenaQR()
-    {
-        SceneManager.LoadScene("QR");
+        SceneManager.LoadScene("Menu");
     }
 }
