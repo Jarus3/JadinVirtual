@@ -83,9 +83,9 @@ public class ControllerDB : MonoBehaviour
         
         Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Coca', 'Erythroxylum coca', 'Planta de la familia de las liliáceas, de hojas carnosas, lanceoladas, con espinas en los bordes, flores amarillas y fruto capsular, que se cría en las regiones cálidas y se usa en medicina y en cosmética.', '0', 'En la medicina tradicional andina y amazónica como: analgésico gástrico y anorexígeno, contra el dolor de las hemorragias menstruales, contra picaduras de arácnidos e insectos, carminativo, antidiarreico, contra el mal de altura o soroche, contra el cansancio', 'Coca');");
         Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Cantuta tricolor', 'Cantua buxifolia', 'Planta perenne muy ramificada y de aspecto muy vistoso que mide entre 2 y 3 m de alto. Sus pequeñas hojas son ásperas, alternas y tienen forma lanceolada-elípticas. Sus flores no tienen olor, crecen en racimos terminales, con corona tubular, cáliz corto y colores muy llamativos, generalmente blanco, amarillo, rosado y rojo intenso.', '0', 'Es una planta ornamental que se cultiva por sus flores coloridas. También tiene propiedades medicinales como antiinflamatorio, cicatrizante y antiespasmódico.', 'Kantuta');");
-        Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Durazno', 'Prunus persica', 'Árbol caducifolio encorvado y muy ramificado con tallos que alcanza los 8 m. De hojas lanceoladas alternas bordes dentados tiene abundantes flores axilares de tonalidades rosáceas o blancas. Su fruto es una drupa carnosa de agradable sabor y aroma.', '0', 'Es un árbol frutal que produce duraznos dulces y jugosos. También tiene usos medicinales como diurético laxante antiinflamatorio antidiabético antiviral antibacteriano antifúngico.', 'Sewenka');");
+        Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Sewenka', 'Prunus persica', 'Árbol caducifolio encorvado y muy ramificado con tallos que alcanza los 8 m. De hojas lanceoladas alternas bordes dentados tiene abundantes flores axilares de tonalidades rosáceas o blancas. Su fruto es una drupa carnosa de agradable sabor y aroma.', '0', 'Es un árbol frutal que produce duraznos dulces y jugosos. También tiene usos medicinales como diurético laxante antiinflamatorio antidiabético antiviral antibacteriano antifúngico.', 'Sewenka');");
         Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Uri uri', 'Arctostaphylos uva-ursi', 'Planta arbustiva o pequeña árbolada con hojas compuestas por folíolos ovalados dentados. Sus flores son pequeñas blancas o rosadas agrupadas en espigas terminales. Su fruto es una cápsula leñosa con semillas aladas.', '0', 'Es una planta medicinal que se usa como astringente antiséptico antiinflamatorio digestivo hepático diurético depurativo laxante antiespasmódico antitumoral.', 'Uri Uri');");
-        Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Sewenqa','Cortaderia jubata','Es una especie de gramínea conocida por varios nombres comunes, incluidos hierba de la pampa de los Andes y plumeros. Es similar a su pariente ampliamente difundido, el plumero de las pampas Cortaderia selloana, pero puede desarrollarse más alto, llegando a medir hasta siete metros de alto.','0','Tiene varios usos medicinales, como antiinflamatorio, cicatrizante, antiespasmódico y digestivo. También se usa como forraje para el ganado y como abono orgánico para los cultivos.','Durazno');");
+        Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Durazno','Cortaderia jubata','Es una especie de gramínea conocida por varios nombres comunes, incluidos hierba de la pampa de los Andes y plumeros. Es similar a su pariente ampliamente difundido, el plumero de las pampas Cortaderia selloana, pero puede desarrollarse más alto, llegando a medir hasta siete metros de alto.','0','Tiene varios usos medicinales, como antiinflamatorio, cicatrizante, antiespasmódico y digestivo. También se usa como forraje para el ganado y como abono orgánico para los cultivos.','Durazno');");
     }
     public void llenarDatosUsuario(string nombre){
         string aux = "INSERT INTO usuario (nombre) VALUES ('"+nombre+"');";
@@ -119,6 +119,54 @@ public class ControllerDB : MonoBehaviour
             connection.Close();
         }
         return aux2;
+    }
+
+    public int getEstadio(string codigoQR){
+        string aux = "SELECT estadio FROM planta WHERE codigoQR = '"+codigoQR+"';";
+        int estadio = 0;
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = aux;
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        estadio = int.Parse(reader["estadio"].ToString());
+                    }
+                }
+            }
+
+            connection.Close();
+        }
+        return estadio;
+    }
+
+    public string getFecha(string codigoQR){
+        string aux = "SELECT fecha_escaneo FROM planta WHERE codigoQR = '"+codigoQR+"';";
+        string fecha = "";
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = aux;
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        fecha = reader["fecha_escaneo"].ToString();
+                    }
+                }
+            }
+
+            connection.Close();
+        }
+        return fecha;
     }
 }
 
