@@ -46,7 +46,10 @@ public class MainScript : MonoBehaviour
     public void iniciar()
     {
         setEscenario(GameObject.Find("cocab"),GameObject.Find("coca"),coca.getEstadio());
-
+        setEscenario(GameObject.Find("sewenqab"),GameObject.Find("sewenqa"),sewenqa.getEstadio());
+        setEscenario(GameObject.Find("kantutab"),GameObject.Find("kantuta"),kantuta.getEstadio());
+        setEscenario(GameObject.Find("duraznob"),GameObject.Find("durazno"),durazno.getEstadio());
+        setEscenario(GameObject.Find("uri urib"),GameObject.Find("uri uri"),uriuri.getEstadio());
     }
     private void diferenciar(GameObject touchedObject)
     {
@@ -72,26 +75,24 @@ public class MainScript : MonoBehaviour
         }
     }
     private void setEscenario(GameObject brote,GameObject mayor, int estadio){
-        Debug.Log("estadio: "+estadio);
         Animator amayor = mayor.GetComponent<Animator>();
         Animator abrote = brote.GetComponent<Animator>();
         if(estadio==0){
             brote.SetActive(true);
             mayor.SetActive(false);
-            abrote.SetInteger("crecer",0);
+            abrote.SetInteger("estadiob",0);
         }else if(estadio==1){
             brote.SetActive(true);
             mayor.SetActive(false);
-            amayor.SetInteger("crecer",0);
-            abrote.SetInteger("crecer",1);
+            abrote.SetInteger("estadiob",1);
         }else if(estadio==2){
             brote.SetActive(false);
             mayor.SetActive(true);
-            amayor.SetInteger("crecer",2);
+            amayor.SetInteger("estadio",2);
         }else{
             brote.SetActive(false);
             mayor.SetActive(true);
-            amayor.SetInteger("crecer",3);
+            amayor.SetInteger("estadio",3);
         }
     }
 }
