@@ -44,7 +44,7 @@ public class SimpleBarcodeScanner : MonoBehaviour
 
         foreach (string codigo in codigosEspecificos)
         {
-            if (barcodeText == codigo && estadio < 3 && diferencia >= 1)
+            if (barcodeText == codigo && estadio < 3)
             {
                 db.Query("UPDATE planta SET estadio = estadio + 1 WHERE codigoQR = '" + codigo + "';");
                 db.Query("UPDATE planta SET fecha_escaneo = date('now') WHERE codigoQR = '" + codigo + "';");

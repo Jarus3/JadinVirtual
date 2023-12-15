@@ -52,6 +52,13 @@ public class TestControllerDB
         Assert.AreEqual(planta.getUsosMedicinales(), usosMedicinales);
         Assert.AreEqual(planta.getCodigoQR(), codigoQR);
     }
+
+    // [Test]
+    // public void TestGetEstadio{
+    //     int estadio = 0;
+    //     int estadioCoca = db.getEstadio("Coca");
+    //     Assert.AreEqual(estadio,estadioCoca);
+    // }
     // public void TestAddUsuario(){
     //     string nombre = "Jarus";
     //     db.llenarDatosUsuario(nombre);
