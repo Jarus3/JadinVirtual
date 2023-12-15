@@ -39,20 +39,12 @@ public class SimpleBarcodeScanner : MonoBehaviour
         int estadio = db.getEstadio(barcodeText);
         string fecha = db.getFecha(barcodeText);
         int diferencia = calcularFecha(fecha);
-        // string fechaActual = DateTime.Now.ToString("yyyy-MM-dd");
 
-        // DateTime fechaBaseDeDatos = DateTime.ParseExact(fecha, "yyyy-MM-dd", null);
-        // DateTime fechaActualConvertida = DateTime.ParseExact(fechaActual, "yyyy-MM-dd", null);
-
-        // Debug.Log(fechaBaseDeDatos);
-        // Debug.Log(fechaActualConvertida);
-
-        // TimeSpan diferencia = fechaActualConvertida - fechaBaseDeDatos;
         // && diferencia >= 1
 
         foreach (string codigo in codigosEspecificos)
         {
-            if (barcodeText == codigo && estadio < 3)
+            if (barcodeText == codigo && estadio < 3 && diferencia >= 1)
             {
                 db.Query("UPDATE planta SET estadio = estadio + 1 WHERE codigoQR = '" + codigo + "';");
                 db.Query("UPDATE planta SET fecha_escaneo = date('now') WHERE codigoQR = '" + codigo + "';");
@@ -67,9 +59,6 @@ public class SimpleBarcodeScanner : MonoBehaviour
 
         DateTime fechaBaseDeDatos = DateTime.ParseExact(fecha, "yyyy-MM-dd", null);
         DateTime fechaActualConvertida = DateTime.ParseExact(fechaActual, "yyyy-MM-dd", null);
-
-        Debug.Log(fechaBaseDeDatos);
-        Debug.Log(fechaActualConvertida);
 
         TimeSpan diferencia = fechaActualConvertida - fechaBaseDeDatos;
 
