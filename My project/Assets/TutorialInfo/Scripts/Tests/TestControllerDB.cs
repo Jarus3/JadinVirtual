@@ -53,12 +53,21 @@ public class TestControllerDB
         Assert.AreEqual(planta.getCodigoQR(), codigoQR);
     }
 
-    // [Test]
-    // public void TestGetEstadio{
-    //     int estadio = 0;
-    //     int estadioCoca = db.getEstadio("Coca");
-    //     Assert.AreEqual(estadio,estadioCoca);
-    // }
+    [Test]
+    public void TestGetEstadio(){
+        int estadio = 0;
+        db.Query("UPDATE planta SET estadio = 0 WHERE codigoQR = 'Coca'");
+        int estadioCoca = db.getEstadio("Coca");
+        Assert.AreEqual(estadio,estadioCoca);
+    }
+
+    [Test]
+    public void TestGetFecha(){
+        string fecha = "2023-12-15";
+        db.Query("UPDATE planta SET fecha_escaneo = '2023-12-15' WHERE codigoQR = 'Coca'");
+        string fechaCoca = db.getFecha("Coca");
+        Assert.AreEqual(fecha,fechaCoca);
+    }
     // public void TestAddUsuario(){
     //     string nombre = "Jarus";
     //     db.llenarDatosUsuario(nombre);
