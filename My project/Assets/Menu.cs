@@ -29,4 +29,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("QR");
     }
+
+    public void escenaAR()
+    {
+        SceneManager.LoadScene("Vision");
+    }
 }
