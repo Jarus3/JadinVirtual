@@ -5,14 +5,17 @@ using System.Data;
 public class ControllerDB : MonoBehaviour
 {
     public static ControllerDB instance;
-    public string dbName = "URI=file:DataBase.db";
+    public string dbName;
+    private IDbConnection dbcon;
+    private IDbCommand dbcmd;
+    private IDataReader reader;
     private void Awake()
     {
         instance = this;
     }
     void Start()
     {
-        
+        dbName = "URI=file:"+Application.persistentDataPath+"Plantas.db";
     }
 
     public void CreateTable()
