@@ -8,9 +8,17 @@ public class Inicio : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private string nombre;
+    private string nombre="Player";
+    private GameObject gdb;
+    private ControllerDB db;
+    void Start()
+    {
+        gdb=GameObject.Find("ControladorInicio");
+        db = gdb.GetComponent<ControllerDB>();
+    }
     public void escenaMenu()
     {
+        iniciarDB();
         guardarUsuario();
         SceneManager.LoadScene("Menu");
     }
@@ -21,8 +29,11 @@ public class Inicio : MonoBehaviour
     }
     private void guardarUsuario()
     {
-        ControllerDB db = new ControllerDB();
-        string sqlQuery = "INSERT INTO usuario (nombre) VALUES ('" + nombre + "')";
-        db.Query(sqlQuery);
+        db.llenarDatosUsuario(nombre);
+    }
+    private void iniciarDB()
+    {
+        db.CreateTable();
+        db.llenarDatos();
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Usuario : MonoBehaviour
 {
     public string nombre;
-    public ArrayList plantas;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +15,17 @@ public class Usuario : MonoBehaviour
     void Update()
     {
         
+    }
+    public void Inicializar(string nombre)
+    {
+        this.nombre=nombre;
+    }
+    public void setNombre(string nombre)
+    {
+        this.nombre=nombre;
+    }
+    public string getNombre()
+    {
+        return this.nombre;
     }
 }

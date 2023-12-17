@@ -108,5 +108,40 @@ public class TestPlanta
         planta.setNombreCientifico(actual);
         Assert.AreEqual(actual,planta.getNombreCientifico());
     }
-
+    [Test]
+    public void testInicializarNombre(){
+        string actual = "Pera";
+        planta.Inicializar(actual, nombreCientifico, descripcion, estadio, usosMedicinales, codigoQR);
+        Assert.AreEqual(actual,planta.getNombre());
+    }
+    [Test]
+    public void testInicializarNombreCientifico(){
+        string actual = "Peraus";
+        planta.Inicializar(nombre, actual, descripcion, estadio, usosMedicinales, codigoQR);
+        Assert.AreEqual(actual,planta.getNombreCientifico());
+    }
+    [Test]
+    public void testInicializarDescripcion(){
+        string actual = "Peraus";
+        planta.Inicializar(nombre, nombreCientifico, actual, estadio, usosMedicinales, codigoQR);
+        Assert.AreEqual(actual,planta.getDescripcion());
+    }
+    [Test]
+    public void testInicializarEstadio(){
+        int actual = 1;
+        planta.Inicializar(nombre, nombreCientifico, descripcion, actual, usosMedicinales, codigoQR);
+        Assert.AreEqual(actual,planta.getEstadio());
+    }
+    [Test]
+    public void testInicializarUsosMedicinales(){
+        string actual = "Peraus";
+        planta.Inicializar(nombre, nombreCientifico, descripcion, estadio, actual, codigoQR);
+        Assert.AreEqual(actual,planta.getUsosMedicinales());
+    }
+    [Test]
+    public void testInicializarCodigoQR(){
+        string actual = "Peraus";
+        planta.Inicializar(nombre, nombreCientifico, descripcion, estadio, usosMedicinales, actual);
+        Assert.AreEqual(actual,planta.getCodigoQR());
+    }
 }
