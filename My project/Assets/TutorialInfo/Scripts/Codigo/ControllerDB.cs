@@ -13,13 +13,9 @@ public class ControllerDB : MonoBehaviour
     void Start()
     {
         
-        // llenarDatos();
-        //CreateTable();
-        //Query("INSERT INTO usuario (nombre) VALUES ('Jarus');");
-        //Query("INSERT INTO planta (nombre,nombreCientifico,descripcion,estadio,usosMedicinales,codigoQR) VALUES ('Aloe Vera','Aloe Vera','Planta de la familia de las liliáceas, de hojas carnosas, lanceoladas, con espinas en los bordes, flores amarillas y fruto capsular, que se cría en las regiones cálidas y se usa en medicina y en cosmética.','1','Es una planta que se utiliza para la piel','123456789');");
     }
 
-    private void CreateTable()
+    public void CreateTable()
     {
         using (var connection = new SqliteConnection(dbName))
         {
