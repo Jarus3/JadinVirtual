@@ -90,4 +90,9 @@ public class Camara : MonoBehaviour
         mainCamera.fieldOfView += deltaDistance * zoomSpeed * Time.deltaTime;
         mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, 10f, 121f);
     }
+
+    public static Camera GetMainCamera()
+    {
+        return mainCamera;
+    }
 }

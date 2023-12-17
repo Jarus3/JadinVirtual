@@ -7,13 +7,23 @@ using UnityEngine.TestTools;
 public class TestCamara
 {
 
+    [Test]
+    public void TestCamarNoEstablecida()
+    {
+        GameObject camaraObject = new GameObject();
+        Camara camaraScript = camaraObject.AddComponent<Camara>();
 
+        Camera mainCamera = Camara.GetMainCamera();
+
+        Assert.IsNull(mainCamera);
+    }
+    
     [Test]
     public void TestNoMoverCamara()
     {
         GameObject camaraObject = new GameObject();
         Camara camaraScript = camaraObject.AddComponent<Camara>();
-
+        
         Touch toque = new Touch { phase = TouchPhase.Stationary };
 
         camaraScript.ManejarEntradaTactil();
