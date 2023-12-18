@@ -19,7 +19,7 @@ public class MainScript : MonoBehaviour
 
         mostrar = otherObject1.GetComponent<MostrarInfo>();
         coca=controllerDB.getInformacionPlanta("Coca");
-        sewenqa=controllerDB.getInformacionPlanta("Sewenqa");
+        sewenqa=controllerDB.getInformacionPlanta("Sewenka");
         kantuta=controllerDB.getInformacionPlanta("Cantuta tricolor");
         durazno=controllerDB.getInformacionPlanta("Durazno");
         uriuri=controllerDB.getInformacionPlanta("Uri uri");
