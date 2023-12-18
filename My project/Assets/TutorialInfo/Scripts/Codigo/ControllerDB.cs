@@ -5,14 +5,14 @@ using System.Data;
 public class ControllerDB : MonoBehaviour
 {
     public static ControllerDB instance;
-    public string dbName = "URI=file:DataBase.db";
+    public string dbName;
     private void Awake()
     {
         instance = this;
     }
     void Start()
     {
-        
+        dbName= "URI=file:" + Application.persistentDataPath + "/DataBase.db";
     }
 
     public void CreateTable()
@@ -33,7 +33,8 @@ public class ControllerDB : MonoBehaviour
                 sqlcreation += "descripcion VARCHAR(500) NOT NULL,";
                 sqlcreation += "estadio INTEGER NOT NULL,";
                 sqlcreation += "usosMedicinales VARCHAR(500) NOT NULL,";
-                sqlcreation += "codigoQR VARCHAR(50) NOT NULL";
+                sqlcreation += "codigoQR VARCHAR(50) NOT NULL,";
+                sqlcreation += "fecha_escaneo VARCHAR(50)";
                 sqlcreation += ");";
 
                 sqlcreation += "CREATE TABLE IF NOT EXISTS usuario(";
